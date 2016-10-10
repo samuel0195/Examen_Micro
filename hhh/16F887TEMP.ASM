@@ -82,13 +82,24 @@ pclath_temp	EQU	0x7F		; variable used for context saving
 
 
 main
+
+;RELOJ IN
+BANKSEL		T1CON			;
+	CLRF		T1CON			;inicializa timer1
+	BSF			T1CON,6			;habilita el timer
+	CLRF		TMR1H			;
+	;CLRF		TMR1L			;inicializa timer1 en ceros
+	NOP							;espacio para colocar la interrup.
+	BSF			T1CON,0			;inicia cuenta
+;RELOJ END
+
 ;inicia bloque configuracion
 		BANKSEL		TRISA		;
 		CLRF		TRISD		;ajusta puerto D como salida
-		BSF			TRISA,0		;RA0 como entrada
+	;	BSF			TRISA,0		;RA0 como entrada
 		BSF			TRISB,0		;RB0 como input
-		BANKSEL		ANSEL		;
-		BSF			ANSEL,0		;ajusta RA0 como entrada analogica
+		BANKSEL		T1CON		;
+		BSF			T1CON,0		;ajusta RA0 como entrada analogica
 		BCF			ANSELH,4	;RB0 como input digital
 		BANKSEL		ADCON0		;
 		MOVLW		b'00000001'	;
@@ -104,44 +115,44 @@ main3
 		BANKSEL		ADCON0		;
 		BSF			ADCON0,1	;inicia conversion analogica digital
 main1
-		BTFSC		ADCON0,1	;
+		BTFSC		TMR1H,1	;
 		GOTO		main1		;
-		BANKSEL		ADRESH		;
-		MOVF		ADRESH,0	;contenido de adresh pasa a W
+		BANKSEL		T1CON		;
+		MOVF		TMR1H,0	;contenido de adresh pasa a W
 
 		MOVLW		d'32'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld0			;
 
 		MOVLW		d'64'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld1			;
 
 		MOVLW		d'96'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld2			;
 
 		MOVLW		d'128'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld3			;
 
 		MOVLW		d'160'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld4			;
 
 		MOVLW		d'192'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		ADRESH,0	;
+		SUBWF		TMR1H,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld5			;
 
@@ -203,6 +214,8 @@ main2
 		CALL		seg1		;
 		BTFSC		PORTB,0		;
 		GOTO		main3		;
+	;	BCF			T1CON,0			;detiene cuenta(timer1)
+
 		BCF			STATUS,Z	;
 		MOVLW		0x2C		;
 		XORWF		FSR,0		;
@@ -280,7 +293,7 @@ main7
 		CALL		seg1		;
 		GOTO		main3		;
 
-	
+
 ;AREA DE SUBRUTINAS
 ;*******************************************************************************************************************************
 ;*******************************************************************************************************************************
@@ -300,7 +313,7 @@ ciclo1
 	DECFSZ		REG1,1			;
 	GOTO		ciclo1			;
 	MOVLW		0xFF			;
-	MOVWF		REG1			;		
+	MOVWF		REG1			;
 	DECFSZ		REG2,1			;
 	GOTO		ciclo1			;
 	MOVWF		REG2			;
@@ -321,7 +334,7 @@ ciclo2
 	DECFSZ		REG1,1			;
 	GOTO		ciclo2			;
 	MOVLW		0xFF			;
-	MOVWF		REG1			;		
+	MOVWF		REG1			;
 	DECFSZ		REG3,1			;
 	GOTO		ciclo2			;
 ;	MOVWF		REG2			;
@@ -337,4 +350,3 @@ ciclo2
 	DE	5, 4, 3, 2, 1
 
 	END                       ; directive 'end of program'
-
