@@ -1,12 +1,12 @@
 MPLINK 4.49, Linker
-Linker Map File - Created Mon Oct 10 13:47:57 2016
+Linker Map File - Created Tue Oct 11 18:03:39 2016
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000004
                    .cinit    romdata   0x000002    program   0x000004
-                   .org_1       code   0x000004    program   0x0001c2
+                   .org_1       code   0x000004    program   0x000134
 .config_2007_16F887TEMP.O       code   0x002007    program   0x000002
 .config_2008_16F887TEMP.O       code   0x002008    program   0x000002
                    .org_2       code   0x002100    program   0x00000a
@@ -16,34 +16,30 @@ Linker Map File - Created Mon Oct 10 13:47:57 2016
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0000e4      
+                            0x000000    0x00009d      
                             0x002007    0x002008      
                             0x002100    0x002104      
-            236 out of 8455 program addresses used, program memory utilization is 2%
+            165 out of 8455 program addresses used, program memory utilization is 1%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   ciclo1   0x0000ce    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo2   0x0000de    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld0   0x000056    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld1   0x00005c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld2   0x000062    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld3   0x000068    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld4   0x00006e    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld5   0x000074    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo1   0x000087    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo2   0x000097    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld0   0x00005a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld1   0x000060    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld2   0x000066    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld3   0x00006c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld4   0x000072    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld5   0x000078    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                      main   0x000010    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main1   0x00002d    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main2   0x00007a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main3   0x00002a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main4   0x000085    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main5   0x000093    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main6   0x0000a4    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main7   0x0000b0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ms1   0x0000d8    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     seg1   0x0000c7    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main1   0x000035    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main2   0x00007e    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main3   0x00002b    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ms1   0x000091    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                     seg1   0x000080    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
 
 
 
@@ -51,22 +47,18 @@ Linker Map File - Created Mon Oct 10 13:47:57 2016
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
                      main   0x000010    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main3   0x00002a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main1   0x00002d    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld0   0x000056    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld1   0x00005c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld2   0x000062    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld3   0x000068    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld4   0x00006e    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ld5   0x000074    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main2   0x00007a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main4   0x000085    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main5   0x000093    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main6   0x0000a4    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                    main7   0x0000b0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     seg1   0x0000c7    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo1   0x0000ce    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ms1   0x0000d8    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo2   0x0000de    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main3   0x00002b    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main1   0x000035    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld0   0x00005a    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld1   0x000060    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld2   0x000066    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld3   0x00006c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld4   0x000072    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ld5   0x000078    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                    main2   0x00007e    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                     seg1   0x000080    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo1   0x000087    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ms1   0x000091    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo2   0x000097    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
 
 

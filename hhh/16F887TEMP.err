@@ -1,6 +1,16 @@
 Warning[205] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 87 : Found directive in column 1. (BANKSEL)
 Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 98 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 99 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 100 : Register in operand not in bank 0.  Ensure that bank bits are correct.
+Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 102 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 103 : Register in operand not in bank 0.  Ensure that bank bits are correct.
 Message[302] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 111 : Register in operand not in bank 0.  Ensure that bank bits are correct.
-Message[305] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 320 : Using default destination of 1 (file).
+Warning[205] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 115 : Found directive in column 1. (BANKSEL)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 116 : Found opcode in column 1. (BTFSC)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 117 : Found opcode in column 1. (GOTO)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 118 : Found opcode in column 1. (CALL)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 119 : Found opcode in column 1. (BTFSC)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 120 : Found opcode in column 1. (GOTO)
+Warning[205] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 121 : Found directive in column 1. (BANKSEL)
+Warning[203] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 122 : Found opcode in column 1. (BCF)
+Message[305] C:\USERS\SAMUEL ESPARZA\DESKTOP\EXAMEN_MICRO\HHH\16F887TEMP.ASM 243 : Using default destination of 1 (file).

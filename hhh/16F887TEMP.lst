@@ -1,4 +1,4 @@
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  1
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  1
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -57,7 +57,7 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
                             ON & _PWRTE_ON & _WDT_OFF & _INTRC_OSC_NOCLKOUT
 2008   3EFF           00042         __CONFIG    _CONFIG2, _WRT_OFF & _BOR21V
                       00043 
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  2
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  2
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -116,7 +116,7 @@ Warning[205]: Found directive in column 1. (BANKSEL)
 0016   1410           00093         BSF                     T1CON,0                 ;inicia cuenta
                       00094 ;RELOJ END
                       00095 
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  3
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  3
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
@@ -126,302 +126,223 @@ LOC  OBJECT CODE     LINE SOURCE TEXT
 0017   1683 1303      00097                 BANKSEL         TRISA           ;
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
 0019   0188           00098                 CLRF            TRISD           ;ajusta puerto D como salida
-                      00099         ;       BSF                     TRISA,0         ;RA0 como entrada
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-001A   1406           00100                 BSF                     TRISB,0         ;RB0 como input
-001B   1283 1303      00101                 BANKSEL         T1CON           ;
-001D   1410           00102                 BSF                     T1CON,0         ;ajusta RA0 como entrada analogica
+001A   1405           00099                 BSF                     TRISA,0         ;RA0 como entrada
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-001E   1209           00103                 BCF                     ANSELH,4        ;RB0 como input digital
-001F   1283 1303      00104                 BANKSEL         ADCON0          ;
-0021   3001           00105                 MOVLW           b'00000001'     ;
-0022   009F           00106                 MOVWF           ADCON0          ;
-0023   0188           00107                 CLRF            PORTD           ;limpia leds
-0024   3024           00108                 MOVLW           0x24            ;
-0025   0084           00109                 MOVWF           FSR                     ;apunta a registro 0x24
-0026   1683 1303      00110                 BANKSEL         ADCON1          ;
+001B   1406           00100                 BSF                     TRISB,0         ;RB0 como input
+001C   1683 1703      00101                 BANKSEL         ANSEL           ;
 Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
-0028   019F           00111                 CLRF            ADCON1          ;
+001E   1408           00102                 BSF                     ANSEL,0         ;ajusta RA0 como entrada analogica
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+001F   1209           00103                 BCF                     ANSELH,4        ;RB0 como input digital
+0020   1283 1303      00104                 BANKSEL         ADCON0          ;
+0022   3001           00105                 MOVLW           b'00000001'     ;
+0023   009F           00106                 MOVWF           ADCON0          ;
+0024   0188           00107                 CLRF            PORTD           ;limpia leds
+0025   3024           00108                 MOVLW           0x24            ;
+0026   0084           00109                 MOVWF           FSR                     ;apunta a registro 0x24
+0027   1683 1303      00110                 BANKSEL         ADCON1          ;
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0029   019F           00111                 CLRF            ADCON1          ;
                       00112 ;inicia programa
-0029   2???           00113                 CALL            seg1            ;espera 1 segundo a que voltaje en canal se estabilize
-002A                  00114 main3
-002A   1283 1303      00115                 BANKSEL         ADCON0          ;
-002C   149F           00116                 BSF                     ADCON0,1        ;inicia conversion analogica digital
-002D                  00117 main1
-002D   188F           00118                 BTFSC           TMR1H,1 ;
-002E   2???           00119                 GOTO            main1           ;
-002F   1283 1303      00120                 BANKSEL         T1CON           ;
-0031   080F           00121                 MOVF            TMR1H,0 ;contenido de adresh pasa a W
-                      00122 
-0032   3020           00123                 MOVLW           d'32'           ;
-0033   1003           00124                 BCF                     STATUS,0        ;limpia carry
-0034   020F           00125                 SUBWF           TMR1H,0 ;
-0035   1C03           00126                 BTFSS           STATUS,C        ;
-0036   2???           00127                 GOTO            ld0                     ;
-                      00128 
-0037   3040           00129                 MOVLW           d'64'           ;
-0038   1003           00130                 BCF                     STATUS,0        ;limpia carry
-0039   020F           00131                 SUBWF           TMR1H,0 ;
-003A   1C03           00132                 BTFSS           STATUS,C        ;
-003B   2???           00133                 GOTO            ld1                     ;
-                      00134 
-003C   3060           00135                 MOVLW           d'96'           ;
-003D   1003           00136                 BCF                     STATUS,0        ;limpia carry
-003E   020F           00137                 SUBWF           TMR1H,0 ;
-003F   1C03           00138                 BTFSS           STATUS,C        ;
-0040   2???           00139                 GOTO            ld2                     ;
-                      00140 
-0041   3080           00141                 MOVLW           d'128'          ;
-0042   1003           00142                 BCF                     STATUS,0        ;limpia carry
-0043   020F           00143                 SUBWF           TMR1H,0 ;
-0044   1C03           00144                 BTFSS           STATUS,C        ;
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  4
+002A   2???           00113                 CALL            seg1            ;espera 1 segundo a que voltaje en canal se estabilize
+002B                  00114 main3
+Warning[205]: Found directive in column 1. (BANKSEL)
+002B   1283 1303      00115 BANKSEL PORTB
+Warning[203]: Found opcode in column 1. (BTFSC)
+002D   1806           00116 BTFSC           PORTB,0         ;
+Warning[203]: Found opcode in column 1. (GOTO)
+002E   2???           00117 GOTO            main3           ;
+Warning[203]: Found opcode in column 1. (CALL)
+002F   2???           00118 CALL            seg1            ;
+Warning[203]: Found opcode in column 1. (BTFSC)
+0030   1806           00119 BTFSC           PORTB,0         ;
+Warning[203]: Found opcode in column 1. (GOTO)
+0031   2???           00120 GOTO            main3           ;
+Warning[205]: Found directive in column 1. (BANKSEL)
+0032   1283 1303      00121 BANKSEL         T1CON           ;
+Warning[203]: Found opcode in column 1. (BCF)
+0034   1010           00122 BCF                     T1CON,0                 ;detiene cuenta(timer1)
+0035                  00123 main1
+                      00124 
+0035   080F           00125                 MOVF            TMR1H,0 ;contenido de adresh pasa a W
+                      00126 
+0036   3020           00127                 MOVLW           d'32'           ;
+0037   1003           00128                 BCF                     STATUS,0        ;limpia carry
+0038   020F           00129                 SUBWF           TMR1H,0 ;
+0039   1C03           00130                 BTFSS           STATUS,C        ;
+003A   2???           00131                 GOTO            ld0                     ;
+                      00132 
+003B   3040           00133                 MOVLW           d'64'           ;
+003C   1003           00134                 BCF                     STATUS,0        ;limpia carry
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  4
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0045   2???           00145                 GOTO            ld3                     ;
-                      00146 
-0046   30A0           00147                 MOVLW           d'160'          ;
-0047   1003           00148                 BCF                     STATUS,0        ;limpia carry
-0048   020F           00149                 SUBWF           TMR1H,0 ;
-0049   1C03           00150                 BTFSS           STATUS,C        ;
-004A   2???           00151                 GOTO            ld4                     ;
-                      00152 
-004B   30C0           00153                 MOVLW           d'192'          ;
-004C   1003           00154                 BCF                     STATUS,0        ;limpia carry
-004D   020F           00155                 SUBWF           TMR1H,0 ;
-004E   1C03           00156                 BTFSS           STATUS,C        ;
-004F   2???           00157                 GOTO            ld5                     ;
-                      00158 
-                      00159 
-                      00160 
-0050   0188           00161                 CLRF            PORTD           ;
-0051   1688           00162                 BSF                     PORTD,5
-0052   1708           00163                 BSF                     PORTD,6
-0053   1788           00164                 BSF                     PORTD,7
-0054   2???           00165                 CALL            ms1                     ;
-0055   2???           00166                 GOTO            main2           ;
-0056                  00167 ld0
-0056   0188           00168                 CLRF            PORTD           ;
-0057   1408           00169                 BSF                     PORTD,0         ;
-0058   1488           00170                 BSF                     PORTD,1
-0059   1508           00171                 BSF                     PORTD,2
-005A   2???           00172                 CALL            ms1                     ;
-005B   2???           00173                 GOTO            main2           ;
-005C                  00174 ld1
-005C   0188           00175                 CLRF            PORTD           ;
-005D   1488           00176                 BSF                     PORTD,1         ;
-005E   1508           00177                 BSF                     PORTD,2
-005F   1588           00178                 BSF                     PORTD,3
-0060   2???           00179                 CALL            ms1                     ;
-0061   2???           00180                 GOTO            main2           ;
-0062                  00181 ld2
-0062   0188           00182                 CLRF            PORTD           ;
-0063   1508           00183                 BSF                     PORTD,2         ;
-0064   1588           00184                 BSF                     PORTD,3
-0065   1608           00185                 BSF                     PORTD,4
-0066   2???           00186                 CALL            ms1                     ;
-0067   2???           00187                 GOTO            main2           ;
-0068                  00188 ld3
-0068   0188           00189                 CLRF            PORTD           ;
-0069   1588           00190                 BSF                     PORTD,3         ;
-006A   1608           00191                 BSF                     PORTD,4
-006B   1688           00192                 BSF                     PORTD,5
-006C   2???           00193                 CALL            ms1                     ;
-006D   2???           00194                 GOTO            main2           ;
-006E                  00195 ld4
-006E   0188           00196                 CLRF            PORTD           ;
-006F   1608           00197                 BSF                     PORTD,4         ;
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  5
+003D   020F           00135                 SUBWF           TMR1H,0 ;
+003E   1C03           00136                 BTFSS           STATUS,C        ;
+003F   2???           00137                 GOTO            ld1                     ;
+                      00138 
+0040   3060           00139                 MOVLW           d'96'           ;
+0041   1003           00140                 BCF                     STATUS,0        ;limpia carry
+0042   020F           00141                 SUBWF           TMR1H,0 ;
+0043   1C03           00142                 BTFSS           STATUS,C        ;
+0044   2???           00143                 GOTO            ld2                     ;
+                      00144 
+0045   3080           00145                 MOVLW           d'128'          ;
+0046   1003           00146                 BCF                     STATUS,0        ;limpia carry
+0047   020F           00147                 SUBWF           TMR1H,0 ;
+0048   1C03           00148                 BTFSS           STATUS,C        ;
+0049   2???           00149                 GOTO            ld3                     ;
+                      00150 
+004A   30A0           00151                 MOVLW           d'160'          ;
+004B   1003           00152                 BCF                     STATUS,0        ;limpia carry
+004C   020F           00153                 SUBWF           TMR1H,0 ;
+004D   1C03           00154                 BTFSS           STATUS,C        ;
+004E   2???           00155                 GOTO            ld4                     ;
+                      00156 
+004F   30C0           00157                 MOVLW           d'192'          ;
+0050   1003           00158                 BCF                     STATUS,0        ;limpia carry
+0051   020F           00159                 SUBWF           TMR1H,0 ;
+0052   1C03           00160                 BTFSS           STATUS,C        ;
+0053   2???           00161                 GOTO            ld5                     ;
+                      00162 
+                      00163 
+                      00164 
+0054   0188           00165                 CLRF            PORTD           ;
+0055   1688           00166                 BSF                     PORTD,5
+0056   1708           00167                 BSF                     PORTD,6
+0057   1788           00168                 BSF                     PORTD,7
+0058   2???           00169                 CALL            ms1                     ;
+0059   2???           00170                 GOTO            main2           ;
+005A                  00171 ld0
+005A   0188           00172                 CLRF            PORTD           ;
+005B   1408           00173                 BSF                     PORTD,0         ;
+005C   1488           00174                 BSF                     PORTD,1
+005D   1508           00175                 BSF                     PORTD,2
+005E   2???           00176                 CALL            ms1                     ;
+005F   2???           00177                 GOTO            main2           ;
+0060                  00178 ld1
+0060   0188           00179                 CLRF            PORTD           ;
+0061   1488           00180                 BSF                     PORTD,1         ;
+0062   1508           00181                 BSF                     PORTD,2
+0063   1588           00182                 BSF                     PORTD,3
+0064   2???           00183                 CALL            ms1                     ;
+0065   2???           00184                 GOTO            main2           ;
+0066                  00185 ld2
+0066   0188           00186                 CLRF            PORTD           ;
+0067   1508           00187                 BSF                     PORTD,2         ;
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  5
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-0070   1688           00198                 BSF                     PORTD,5
-0071   1708           00199                 BSF                     PORTD,6
-0072   2???           00200                 CALL            ms1                     ;
-0073   2???           00201                 GOTO            main2           ;
-0074                  00202 ld5
-0074   0188           00203                 CLRF            PORTD           ;
-0075   1688           00204                 BSF                     PORTD,5         ;
-0076   1708           00205                 BSF                     PORTD,6
-0077   1788           00206                 BSF                     PORTD,7
-0078   2???           00207                 CALL            ms1                     ;
-0079   2???           00208                 GOTO            main2           ;
-                      00209 
-                      00210 
-007A                  00211 main2
-007A   1806           00212                 BTFSC           PORTB,0         ;
-007B   2???           00213                 GOTO            main3           ;
-007C   2???           00214                 CALL            seg1            ;
-007D   1806           00215                 BTFSC           PORTB,0         ;
-007E   2???           00216                 GOTO            main3           ;
-                      00217         ;       BCF                     T1CON,0                 ;detiene cuenta(timer1)
+0068   1588           00188                 BSF                     PORTD,3
+0069   1608           00189                 BSF                     PORTD,4
+006A   2???           00190                 CALL            ms1                     ;
+006B   2???           00191                 GOTO            main2           ;
+006C                  00192 ld3
+006C   0188           00193                 CLRF            PORTD           ;
+006D   1588           00194                 BSF                     PORTD,3         ;
+006E   1608           00195                 BSF                     PORTD,4
+006F   1688           00196                 BSF                     PORTD,5
+0070   2???           00197                 CALL            ms1                     ;
+0071   2???           00198                 GOTO            main2           ;
+0072                  00199 ld4
+0072   0188           00200                 CLRF            PORTD           ;
+0073   1608           00201                 BSF                     PORTD,4         ;
+0074   1688           00202                 BSF                     PORTD,5
+0075   1708           00203                 BSF                     PORTD,6
+0076   2???           00204                 CALL            ms1                     ;
+0077   2???           00205                 GOTO            main2           ;
+0078                  00206 ld5
+0078   0188           00207                 CLRF            PORTD           ;
+0079   1688           00208                 BSF                     PORTD,5         ;
+007A   1708           00209                 BSF                     PORTD,6
+007B   1788           00210                 BSF                     PORTD,7
+007C   2???           00211                 CALL            ms1                     ;
+007D   2???           00212                 GOTO            main2           ;
+                      00213 
+                      00214 
+007E                  00215 main2
+007E   1410           00216                 BSF                     T1CON,0                 ;inicia cuenta
+007F   2???           00217                 GOTO main3
                       00218 
-007F   1103           00219                 BCF                     STATUS,Z        ;
-0080   302C           00220                 MOVLW           0x2C            ;
-0081   0604           00221                 XORWF           FSR,0           ;
-0082   1D03           00222                 BTFSS           STATUS,Z        ;
-0083   2???           00223                 GOTO            main4           ;
-0084   2???           00224                 GOTO            main5           ;
-0085                  00225 main4
-0085   0808           00226                 MOVF            PORTD,0         ;
-0086   0080           00227                 MOVWF           INDF            ;
-0087   0188           00228                 CLRF            PORTD           ;
-0088   2???           00229                 CALL            seg1            ;
-0089   0800           00230                 MOVF            INDF,0          ;
-008A   0088           00231                 MOVWF           PORTD           ;
-008B   2???           00232                 CALL            seg1            ;
-008C   0188           00233                 CLRF            PORTD           ;
-008D   2???           00234                 CALL            seg1            ;
-008E   0800           00235                 MOVF            INDF,0          ;
-008F   0088           00236                 MOVWF           PORTD           ;
-0090   2???           00237                 CALL            seg1            ;
-0091   0A84           00238                 INCF            FSR,1           ;
-0092   2???           00239                 GOTO            main3           ;
-0093                  00240 main5
-0093   0188           00241                 CLRF            PORTD           ;
-0094   2???           00242                 CALL            seg1            ;
-0095   30FF           00243                 MOVLW           0xFF            ;
-0096   0088           00244                 MOVWF           PORTD           ;
-0097   2???           00245                 CALL            seg1            ;
-0098   0188           00246                 CLRF            PORTD           ;
-0099   2???           00247                 CALL            seg1            ;
-009A   30FF           00248                 MOVLW           0xFF            ;
-009B   0088           00249                 MOVWF           PORTD           ;
-009C   2???           00250                 CALL            seg1            ;
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  6
+                      00219 
+                      00220 ;AREA DE SUBRUTINAS
+                      00221 ;*******************************************************************************************************
+                            ************************
+                      00222 ;*******************************************************************************************************
+                            ************************
+                      00223 ;*******************************************************************************************************
+                            ************************
+                      00224 ;*******************************************************************************************************
+                            ************************
+                      00225 ;*******************************************************************************************************
+                            ************************
+                      00226 ;Subrutina que espera 1 segundo
+                      00227 ;Variables de trabajo REG1, REG2 y REG3
+0080                  00228 seg1
+0080   1283 1303      00229         BANKSEL         PORTD                   ;
+0082   30FF           00230         MOVLW           0xFF                    ;
+0083   00A0           00231         MOVWF           REG1                    ;
+0084   00A1           00232         MOVWF           REG2                    ;
+0085   3003           00233         MOVLW           d'3'                    ;
+0086   00A2           00234         MOVWF           REG3                    ;
+0087                  00235 ciclo1
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  6
 
 
 LOC  OBJECT CODE     LINE SOURCE TEXT
   VALUE
 
-009D   0188           00251                 CLRF            PORTD           ;
-009E   2???           00252                 CALL            seg1            ;
-009F   30FF           00253                 MOVLW           0xFF            ;
-00A0   0088           00254                 MOVWF           PORTD           ;
-00A1   2???           00255                 CALL            seg1            ;apago y prendio 3 veces todo el puerto D
-00A2   3024           00256                 MOVLW           0x24            ;
-00A3   0084           00257                 MOVWF           FSR                     ;
-00A4                  00258 main6
-00A4   0800           00259                 MOVF            INDF,0          ;
-00A5   0088           00260                 MOVWF           PORTD           ;
-00A6   2???           00261                 CALL            seg1            ;
-00A7   0188           00262                 CLRF            PORTD           ;
-00A8   2???           00263                 CALL            seg1            ;
-00A9   1103           00264                 BCF                     STATUS,Z        ;
-00AA   302B           00265                 MOVLW           0x2B            ;
-00AB   0604           00266                 XORWF           FSR,0           ;
-00AC   1903           00267                 BTFSC           STATUS,Z        ;
-00AD   2???           00268                 GOTO            main7           ;
-00AE   0A84           00269                 INCF            FSR,1           ;
-00AF   2???           00270                 GOTO            main6           ;
-00B0                  00271 main7
-00B0   3024           00272                 MOVLW           0x24            ;
-00B1   0084           00273                 MOVWF           FSR                     ;
-00B2   0188           00274                 CLRF            PORTD           ;
-00B3   2???           00275                 CALL            seg1            ;
-00B4   30FF           00276                 MOVLW           0xFF            ;
-00B5   0088           00277                 MOVWF           PORTD           ;
-00B6   2???           00278                 CALL            seg1            ;
-00B7   0188           00279                 CLRF            PORTD           ;
-00B8   2???           00280                 CALL            seg1            ;
-00B9   30FF           00281                 MOVLW           0xFF            ;
-00BA   0088           00282                 MOVWF           PORTD           ;
-00BB   2???           00283                 CALL            seg1            ;
-00BC   0188           00284                 CLRF            PORTD           ;
-00BD   2???           00285                 CALL            seg1            ;
-00BE   30FF           00286                 MOVLW           0xFF            ;
-00BF   0088           00287                 MOVWF           PORTD           ;
-00C0   2???           00288                 CALL            seg1            ;
-00C1   0188           00289                 CLRF            PORTD           ;
-00C2   2???           00290                 CALL            seg1            ;
-00C3   30FF           00291                 MOVLW           0xFF            ;
-00C4   0088           00292                 MOVWF           PORTD           ;
-00C5   2???           00293                 CALL            seg1            ;
-00C6   2???           00294                 GOTO            main3           ;
-                      00295 
-                      00296 
-                      00297 ;AREA DE SUBRUTINAS
-                      00298 ;*******************************************************************************************************
-                            ************************
-                      00299 ;*******************************************************************************************************
-                            ************************
-                      00300 ;*******************************************************************************************************
-                            ************************
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  7
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-                      00301 ;*******************************************************************************************************
-                            ************************
-                      00302 ;*******************************************************************************************************
-                            ************************
-                      00303 ;Subrutina que espera 1 segundo
-                      00304 ;Variables de trabajo REG1, REG2 y REG3
-00C7                  00305 seg1
-00C7   1283 1303      00306         BANKSEL         PORTD                   ;
-00C9   30FF           00307         MOVLW           0xFF                    ;
-00CA   00A0           00308         MOVWF           REG1                    ;
-00CB   00A1           00309         MOVWF           REG2                    ;
-00CC   3003           00310         MOVLW           d'3'                    ;
-00CD   00A2           00311         MOVWF           REG3                    ;
-00CE                  00312 ciclo1
-00CE   0BA0           00313         DECFSZ          REG1,1                  ;
-00CF   2???           00314         GOTO            ciclo1                  ;
-00D0   30FF           00315         MOVLW           0xFF                    ;
-00D1   00A0           00316         MOVWF           REG1                    ;
-00D2   0BA1           00317         DECFSZ          REG2,1                  ;
-00D3   2???           00318         GOTO            ciclo1                  ;
-00D4   00A1           00319         MOVWF           REG2                    ;
+0087   0BA0           00236         DECFSZ          REG1,1                  ;
+0088   2???           00237         GOTO            ciclo1                  ;
+0089   30FF           00238         MOVLW           0xFF                    ;
+008A   00A0           00239         MOVWF           REG1                    ;
+008B   0BA1           00240         DECFSZ          REG2,1                  ;
+008C   2???           00241         GOTO            ciclo1                  ;
+008D   00A1           00242         MOVWF           REG2                    ;
 Message[305]: Using default destination of 1 (file).
-00D5   0BA2           00320         DECFSZ          REG3                    ;
-00D6   2???           00321         GOTO            ciclo1                  ;
-00D7   0008           00322         RETURN                                          ;
-                      00323 ;*******************************************************************************************************
+008E   0BA2           00243         DECFSZ          REG3                    ;
+008F   2???           00244         GOTO            ciclo1                  ;
+0090   0008           00245         RETURN                                          ;
+                      00246 ;*******************************************************************************************************
                             ************************
-                      00324 ;Subrutina que espera 1 segundo
-                      00325 ;Variables de trabajo REG1, REG2 y REG3
-00D8                  00326 ms1
-00D8   1283 1303      00327         BANKSEL         PORTD                   ;
-00DA   30FF           00328         MOVLW           0xFF                    ;
-00DB   00A0           00329         MOVWF           REG1                    ;
-                      00330 ;       MOVWF           REG2                    ;
-00DC   30F0           00331         MOVLW           d'240'                  ;
-00DD   00A2           00332         MOVWF           REG3                    ;
-00DE                  00333 ciclo2
-00DE   0BA0           00334         DECFSZ          REG1,1                  ;
-00DF   2???           00335         GOTO            ciclo2                  ;
-00E0   30FF           00336         MOVLW           0xFF                    ;
-00E1   00A0           00337         MOVWF           REG1                    ;
-00E2   0BA2           00338         DECFSZ          REG3,1                  ;
-00E3   2???           00339         GOTO            ciclo2                  ;
-                      00340 ;       MOVWF           REG2                    ;
-                      00341 ;       DECFSZ          REG3                    ;
-                      00342 ;       GOTO            ciclo1                  ;
-00E4   0008           00343         RETURN                                          ;
-                      00344 
-                      00345 
-                      00346 
-                      00347 ; example of preloading EEPROM locations
-                      00348 
-                      00349         ORG     0x2100
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  8
-
-
-LOC  OBJECT CODE     LINE SOURCE TEXT
-  VALUE
-
-2100   0005 0004 0003 00350         DE      5, 4, 3, 2, 1
+                      00247 ;Subrutina que espera 1 segundo
+                      00248 ;Variables de trabajo REG1, REG2 y REG3
+0091                  00249 ms1
+0091   1283 1303      00250         BANKSEL         PORTD                   ;
+0093   30FF           00251         MOVLW           0xFF                    ;
+0094   00A0           00252         MOVWF           REG1                    ;
+                      00253 ;       MOVWF           REG2                    ;
+0095   30F0           00254         MOVLW           d'240'                  ;
+0096   00A2           00255         MOVWF           REG3                    ;
+0097                  00256 ciclo2
+0097   0BA0           00257         DECFSZ          REG1,1                  ;
+0098   2???           00258         GOTO            ciclo2                  ;
+0099   30FF           00259         MOVLW           0xFF                    ;
+009A   00A0           00260         MOVWF           REG1                    ;
+009B   0BA2           00261         DECFSZ          REG3,1                  ;
+009C   2???           00262         GOTO            ciclo2                  ;
+                      00263 ;       MOVWF           REG2                    ;
+                      00264 ;       DECFSZ          REG3                    ;
+                      00265 ;       GOTO            ciclo1                  ;
+009D   0008           00266         RETURN                                          ;
+                      00267 
+                      00268 
+                      00269 
+                      00270 ; example of preloading EEPROM locations
+                      00271 
+                      00272         ORG     0x2100
+2100   0005 0004 0003 00273         DE      5, 4, 3, 2, 1
        0002 0001 
-                      00351 
-28E4 3EFF             00352         END                       ; directive 'end of program'
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE  9
+                      00274 
+28E4 3EFF             00275         END                       ; directive 'end of program'
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  7
 
 
 SYMBOL TABLE
@@ -480,7 +401,7 @@ BRG6                              00000006
 BRG7                              00000007
 BRG8                              00000000
 BRG9                              00000001
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 10
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  8
 
 
 SYMBOL TABLE
@@ -539,7 +460,7 @@ CHS0                              00000002
 CHS1                              00000003
 CHS2                              00000004
 CHS3                              00000005
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 11
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE  9
 
 
 SYMBOL TABLE
@@ -598,7 +519,7 @@ INTF                              00000001
 IOCB                              00000096
 IOCB0                             00000000
 IOCB1                             00000001
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 12
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 10
 
 
 SYMBOL TABLE
@@ -657,7 +578,7 @@ PDC0                              00000000
 PDC1                              00000001
 PDC2                              00000002
 PDC3                              00000003
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 13
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 11
 
 
 SYMBOL TABLE
@@ -716,7 +637,7 @@ RC2                               00000002
 RC3                               00000003
 RC4                               00000004
 RC5                               00000005
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 14
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 12
 
 
 SYMBOL TABLE
@@ -775,7 +696,7 @@ SSPADD                            00000093
 SSPBUF                            00000013
 SSPCON                            00000014
 SSPCON2                           00000091
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 15
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 13
 
 
 SYMBOL TABLE
@@ -834,7 +755,7 @@ TOUTPS0                           00000003
 TOUTPS1                           00000004
 TOUTPS2                           00000005
 TOUTPS3                           00000006
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 16
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 14
 
 
 SYMBOL TABLE
@@ -893,7 +814,7 @@ TX9D                              00000000
 TXD8                              00000000
 TXEN                              00000005
 TXIE                              00000004
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 17
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 15
 
 
 SYMBOL TABLE
@@ -952,7 +873,7 @@ _BOR_ON                           00003FFF
 _BOR_SBODEN                       00003DFF
 _CONFIG1                          00002007
 _CONFIG2                          00002008
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 18
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 16
 
 
 SYMBOL TABLE
@@ -1010,37 +931,33 @@ _XT_OSC                           00003FF9
 __16F887                          00000001
 __DEBUG                           1
 __MPLAB_DEBUGGER_PICKIT2          1
-ciclo1                            000000CE
-MPASM  5.51                    16F887TEMP.ASM   10-10-2016  13:47:56         PAGE 19
+ciclo1                            00000087
+MPASM  5.51                    16F887TEMP.ASM   10-11-2016  18:03:38         PAGE 17
 
 
 SYMBOL TABLE
   LABEL                             VALUE 
 
-ciclo2                            000000DE
+ciclo2                            00000097
 conv                              00000023
-ld0                               00000056
-ld1                               0000005C
-ld2                               00000062
-ld3                               00000068
-ld4                               0000006E
-ld5                               00000074
+ld0                               0000005A
+ld1                               00000060
+ld2                               00000066
+ld3                               0000006C
+ld4                               00000072
+ld5                               00000078
 main                              00000010
-main1                             0000002D
-main2                             0000007A
-main3                             0000002A
-main4                             00000085
-main5                             00000093
-main6                             000000A4
-main7                             000000B0
-ms1                               000000D8
+main1                             00000035
+main2                             0000007E
+main3                             0000002B
+ms1                               00000091
 pclath_temp                       0000007F
-seg1                              000000C7
+seg1                              00000080
 status_temp                       0000007E
 w_temp                            0000007D
 
 Errors   :     0
-Warnings :     1 reported,     0 suppressed
-Messages :     5 reported,     0 suppressed
+Warnings :     9 reported,     0 suppressed
+Messages :     7 reported,     0 suppressed
 
 

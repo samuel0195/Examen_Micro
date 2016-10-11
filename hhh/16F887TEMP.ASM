@@ -96,10 +96,10 @@ BANKSEL		T1CON			;
 ;inicia bloque configuracion
 		BANKSEL		TRISA		;
 		CLRF		TRISD		;ajusta puerto D como salida
-	;	BSF			TRISA,0		;RA0 como entrada
+		BSF			TRISA,0		;RA0 como entrada
 		BSF			TRISB,0		;RB0 como input
-		BANKSEL		T1CON		;
-		BSF			T1CON,0		;ajusta RA0 como entrada analogica
+		BANKSEL		ANSEL		;
+		BSF			ANSEL,0		;ajusta RA0 como entrada analogica
 		BCF			ANSELH,4	;RB0 como input digital
 		BANKSEL		ADCON0		;
 		MOVLW		b'00000001'	;
@@ -112,12 +112,16 @@ BANKSEL		T1CON			;
 ;inicia programa
 		CALL		seg1		;espera 1 segundo a que voltaje en canal se estabilize
 main3
-		BANKSEL		ADCON0		;
-		BSF			ADCON0,1	;inicia conversion analogica digital
+BANKSEL	PORTB
+BTFSC		PORTB,0		;
+GOTO		main3		;
+CALL		seg1		;
+BTFSC		PORTB,0		;
+GOTO		main3		;
+BANKSEL		T1CON		;
+BCF			T1CON,0			;detiene cuenta(timer1)
 main1
-		BTFSC		TMR1H,1	;
-		GOTO		main1		;
-		BANKSEL		T1CON		;
+
 		MOVF		TMR1H,0	;contenido de adresh pasa a W
 
 		MOVLW		d'32'		;
@@ -209,89 +213,8 @@ ld5
 
 
 main2
-		BTFSC		PORTB,0		;
-		GOTO		main3		;
-		CALL		seg1		;
-		BTFSC		PORTB,0		;
-		GOTO		main3		;
-	;	BCF			T1CON,0			;detiene cuenta(timer1)
-
-		BCF			STATUS,Z	;
-		MOVLW		0x2C		;
-		XORWF		FSR,0		;
-		BTFSS		STATUS,Z	;
-		GOTO		main4		;
-		GOTO		main5		;
-main4
-		MOVF		PORTD,0		;
-		MOVWF		INDF		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVF		INDF,0		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVF		INDF,0		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		INCF		FSR,1		;
-		GOTO		main3		;
-main5
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;apago y prendio 3 veces todo el puerto D
-		MOVLW		0x24		;
-		MOVWF		FSR			;
-main6
-		MOVF		INDF,0		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		BCF			STATUS,Z	;
-		MOVLW		0x2B		;
-		XORWF		FSR,0		;
-		BTFSC		STATUS,Z	;
-		GOTO		main7		;
-		INCF		FSR,1		;
-		GOTO		main6		;
-main7
-		MOVLW		0x24		;
-		MOVWF		FSR			;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		CLRF		PORTD		;
-		CALL		seg1		;
-		MOVLW		0xFF		;
-		MOVWF		PORTD		;
-		CALL		seg1		;
-		GOTO		main3		;
+		BSF			T1CON,0			;inicia cuenta
+		GOTO main3
 
 
 ;AREA DE SUBRUTINAS
