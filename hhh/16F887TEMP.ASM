@@ -88,7 +88,7 @@ BANKSEL		T1CON			;
 	CLRF		T1CON			;inicializa timer1
 	BSF			T1CON,6			;habilita el timer
 	CLRF		TMR1H			;
-	;CLRF		TMR1L			;inicializa timer1 en ceros
+	CLRF		TMR1L			;inicializa timer1 en ceros
 	NOP							;espacio para colocar la interrup.
 	BSF			T1CON,0			;inicia cuenta
 ;RELOJ END
@@ -122,41 +122,41 @@ BANKSEL		T1CON		;
 BCF			T1CON,0			;detiene cuenta(timer1)
 main1
 
-		MOVF		TMR1H,0	;contenido de adresh pasa a W
+		MOVF		TMR1L,0	;contenido de adresh pasa a W
 
 		MOVLW		d'32'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld0			;
 
 		MOVLW		d'64'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld1			;
 
 		MOVLW		d'96'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld2			;
 
 		MOVLW		d'128'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld3			;
 
 		MOVLW		d'160'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld4			;
 
 		MOVLW		d'192'		;
 		BCF			STATUS,0	;limpia carry
-		SUBWF		TMR1H,0	;
+		SUBWF		TMR1L,0	;
 		BTFSS		STATUS,C	;
 		GOTO		ld5			;
 
@@ -214,7 +214,12 @@ ld5
 
 main2
 		BSF			T1CON,0			;inicia cuenta
-		GOTO main3
+		CALL		seg1
+		CALL		seg1
+		CALL		seg1
+		CLRF    PORTD
+		GOTO		potenciometro3
+		GOTO     main3
 
 
 ;AREA DE SUBRUTINAS
@@ -223,6 +228,113 @@ main2
 ;*******************************************************************************************************************************
 ;*******************************************************************************************************************************
 ;*******************************************************************************************************************************
+
+potenciometro3
+		BANKSEL		ADCON0		;
+		BSF			ADCON0,1	;inicia conversion analogica digital
+potenciometro1
+		BTFSC		ADCON0,1	;
+		GOTO		potenciometro1		;
+		BANKSEL		ADRESH		;
+		MOVF		ADRESH,0	;contenido de adresh pasa a W
+
+		MOVLW		d'32'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot0			;
+
+		MOVLW		d'64'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot1			;
+
+		MOVLW		d'96'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot2			;
+
+		MOVLW		d'128'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot3			;
+
+		MOVLW		d'160'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot4			;
+
+		MOVLW		d'192'		;
+		BCF			STATUS,0	;limpia carry
+		SUBWF		ADRESH,0	;
+		BTFSS		STATUS,C	;
+		GOTO		pot5			;
+
+		CLRF		PORTD		;
+		BSF			PORTD,5		;
+		BSF			PORTD,6		;
+		BSF			PORTD,7		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+pot0
+		CLRF		PORTD		;
+		BSF			PORTD,0		;
+		BSF			PORTD,1		;
+		BSF			PORTD,2		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+pot1
+		CLRF		PORTD		;
+		BSF			PORTD,1		;
+		BSF			PORTD,2		;
+		BSF			PORTD,3		;
+		CALL		ms1			;
+		GOTO		potenciometro2
+pot2
+		CLRF		PORTD		;
+		BSF			PORTD,2		;
+		BSF			PORTD,3		;
+		BSF			PORTD,4		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+pot3
+		CLRF		PORTD		;
+		BSF			PORTD,3		;
+		BSF			PORTD,4		;
+		BSF			PORTD,5		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+pot4
+		CLRF		PORTD		;
+		BSF			PORTD,4		;
+		BSF			PORTD,5		;
+		BSF			PORTD,6		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+pot5
+		CLRF		PORTD		;
+		BSF			PORTD,5		;
+		BSF			PORTD,6		;
+		BSF			PORTD,7		;
+		CALL		ms1			;
+		GOTO		potenciometro2		;
+
+potenciometro2
+		BTFSC		PORTB,0		;
+		GOTO		potenciometro3		;
+		CALL		seg1		;
+		BTFSC		PORTB,0		;
+		GOTO		main3		;
+		BCF			STATUS,Z	;
+		MOVLW		0x2C		;
+		XORWF		FSR,0		;
+		BTFSS		STATUS,Z	;
+
+
 ;Subrutina que espera 1 segundo
 ;Variables de trabajo REG1, REG2 y REG3
 seg1
@@ -244,6 +356,10 @@ ciclo1
 	GOTO		ciclo1			;
 	RETURN						;
 ;*******************************************************************************************************************************
+
+
+
+
 ;Subrutina que espera 1 segundo
 ;Variables de trabajo REG1, REG2 y REG3
 ms1
