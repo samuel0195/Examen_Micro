@@ -1,12 +1,12 @@
 MPLINK 4.49, Linker
-Linker Map File - Created Fri Oct 14 01:07:43 2016
+Linker Map File - Created Fri Oct 14 21:09:57 2016
 
                                  Section Info
                   Section       Type    Address   Location Size(Bytes)
                 ---------  ---------  ---------  ---------  ---------
                    .org_0       code   0x000000    program   0x000004
                    .cinit    romdata   0x000002    program   0x000004
-                   .org_1       code   0x000004    program   0x0001f2
+                   .org_1       code   0x000004    program   0x00013e
 .config_2007_16F887TEMP.O       code   0x002007    program   0x000002
 .config_2008_16F887TEMP.O       code   0x002008    program   0x000002
                    .org_2       code   0x002100    program   0x00000a
@@ -16,18 +16,18 @@ Linker Map File - Created Fri Oct 14 01:07:43 2016
                               Program Memory Usage 
                                Start         End      
                            ---------   ---------      
-                            0x000000    0x0000fc      
+                            0x000000    0x0000a2      
                             0x002007    0x002008      
                             0x002100    0x002104      
-            260 out of 8455 program addresses used, program memory utilization is 3%
+            170 out of 8455 program addresses used, program memory utilization is 2%
 
 
 
                               Symbols - Sorted by Name
                      Name    Address   Location    Storage File                     
                 ---------  ---------  ---------  --------- ---------                
-                   ciclo1   0x0000e6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo2   0x0000f6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo1   0x00008c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo2   0x00009c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                       ld0   0x00005b    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                       ld1   0x000061    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                       ld2   0x000067    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
@@ -38,17 +38,8 @@ Linker Map File - Created Fri Oct 14 01:07:43 2016
                     main1   0x000036    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                     main2   0x00007f    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                     main3   0x00002c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ms1   0x0000f0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot0   0x0000b2    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot1   0x0000b8    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot2   0x0000be    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot3   0x0000c4    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot4   0x0000ca    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot5   0x0000d0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro1   0x000089    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro2   0x0000d6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro3   0x000086    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     seg1   0x0000df    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ms1   0x000096    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                     seg1   0x000085    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
 
 
 
@@ -65,18 +56,9 @@ Linker Map File - Created Fri Oct 14 01:07:43 2016
                       ld4   0x000073    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                       ld5   0x000079    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
                     main2   0x00007f    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro3   0x000086    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro1   0x000089    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot0   0x0000b2    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot1   0x0000b8    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot2   0x0000be    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot3   0x0000c4    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot4   0x0000ca    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     pot5   0x0000d0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-           potenciometro2   0x0000d6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                     seg1   0x0000df    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo1   0x0000e6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                      ms1   0x0000f0    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
-                   ciclo2   0x0000f6    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                     seg1   0x000085    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo1   0x00008c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                      ms1   0x000096    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
+                   ciclo2   0x00009c    program     static C:\Users\Samuel Esparza\Desktop\Examen_Micro\hhh\16F887TEMP.ASM
 
 
